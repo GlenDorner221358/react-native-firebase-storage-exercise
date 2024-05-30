@@ -18,10 +18,10 @@ export const handleUploadOfImage = async (uri, fileName) => {
     })
 
     const uploadRef = ref(storage, fileName)
-    const uploadResult = await uploadBytes(imageRef, blob)
+    const uploadResult = await uploadBytes(uploadRef, blob)
 
     blob.close()
 
-    console.log(await getDownloadURL(imageRef))
+    console.log(await getDownloadURL(uploadRef))
 
 }
