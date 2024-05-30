@@ -3,12 +3,12 @@ import { storage } from "../firebase";
 
 // Upload Image to Buckets
 export const handleUploadOfImage = async (uri, fileName) => {
-    const blob = new Promise((resolve, reject) => {
+    const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
             resolve(xhr.response);
-        }
-        xhr.onerror = function () {
+        };
+        xhr.onerror = function (e) {
             console.log(e);
             reject(new TypeError("Network request failed"));
         }
@@ -17,12 +17,11 @@ export const handleUploadOfImage = async (uri, fileName) => {
         xhr.send(null);
     })
 
-    const imageRef = ref(storage, fileName)
-
+    const uploadRef = ref(storage, fileName)
     const uploadResult = await uploadBytes(imageRef, blob)
 
-    // blob.close()
+    blob.close()
 
-    console.log(getDownloadURL(imageRef))
+    console.log(await getDownloadURL(imageRef))
 
 }

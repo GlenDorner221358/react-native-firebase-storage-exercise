@@ -25,8 +25,8 @@ const AddScreen = () => {
         }
     };
 
-    const uploadImage = () => {
-        handleUploadOfImage(image, title)
+    const uploadImage = async () => {
+        await handleUploadOfImage(image, title)
     }
 
 
